@@ -14,6 +14,8 @@ public class BinarySearchTree {
     private BinaryNode root;
     private BinaryNode father;
     private boolean position;
+    private int contadorHojas=0;
+    private int contNodos = 0;
 
     public BinarySearchTree() {
         root = null;
@@ -35,28 +37,76 @@ public class BinarySearchTree {
             InOrden(currentRoot.getRight());
         }
     }
-
-    //Punto 2
-    public void Postorden() {
-        //...
+    
+   //Punto 2
+   public void Postorden() {
+        Postorden(root);
     }
-
+ 
+    private void Postorden(BinaryNode currentRoot){
+        if (currentRoot != null) {
+            Postorden(currentRoot.getLeft());
+            Postorden(currentRoot.getRight());
+            System.out.print(currentRoot.getData() + " ");
+        }
+    }
+   
     //Punto 3
     public void PreOrden() {
-        //...
+       PreOrden(root);
     }
+   
+     private void PreOrden(BinaryNode currentRoot){
+        if (currentRoot != null) {
+            System.out.print(currentRoot.getData() + " ");
+            PreOrden(currentRoot.getLeft());
+            PreOrden(currentRoot.getRight());
+           
+        }
+    }  
 
     //Punto 4
-    public int CountNodes() {
-        //...
-        return 0;
+     public int CountNodes(){
+     
+         return CountNodes(root);
+     
+     }
+     
+     
+     
+     
+    private int CountNodes(BinaryNode currentRoot) {
+        
+         if (currentRoot != null) {
+            CountNodes(currentRoot.getLeft());
+           
+            CountNodes(currentRoot.getRight());
+            contNodos++;
+        } 
+        
+        
+        return contNodos;
     }
 
     //Punto 5
-    public int CountLeafs() {
-        //...
-        return 0;
+    public int CountLeafs(){
+        return CountLeafs(root);
     }
+   
+    private int CountLeafs(BinaryNode currentRoot) {
+        if(currentRoot != null){
+            if(currentRoot.getLeft() == null && currentRoot.getRight() == null){
+                contadorHojas++;
+            }
+            CountLeafs(currentRoot.getLeft());
+            CountLeafs(currentRoot.getRight());
+        }
+        return contadorHojas;
+    }
+
+
+    
+    
 
     public void Add(int data) {
         if (root == null) {
@@ -74,7 +124,7 @@ public class BinarySearchTree {
 
     private void Add(int data, BinaryNode currentRoot) {
         if (data < currentRoot.getData()) {
-            if (currentRoot.getLeft() == null) {
+            if (currentRoot.getLeft() == null ) {
                 currentRoot.setLeft(new BinaryNode(data));
             } else {
                 Add(data, currentRoot.getLeft());

@@ -43,21 +43,44 @@ public class EstructurasNoLineales {
         System.out.println(maxData.getDataHeap());
         maxData.ExtractMax();
         System.out.println(maxData.getDataHeap());
-
-        BinarySearchTree pino = new BinarySearchTree(8);
+        System.out.println("--------------------------TALLER------------------------------");
+        BinarySearchTree pino = new BinarySearchTree(10);
         try {
+            pino.Add(5);
             pino.Add(3);
-            pino.Add(9);    
-            pino.InOrden();
-            pino.Delete(3);
+            pino.Add(8);
+            pino.Add(7);
+           //pino.Add(18);
+            pino.Add(20);
+            pino.Add(18);
+            pino.Add(25);
+            pino.Add(23);
+            pino.Add(21);
+            pino.Add(24);
+            pino.Add(30);
+            
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
-        System.out.println("");
-
-        pino.InOrden();
-        //System.out.println(pino.Search(88));
+       
+        
+       System.out.println("INORDEN"); 
+       pino.InOrden();
+       System.out.println("");
+       System.out.println("POSTORDEN");
+       pino.Postorden();
+       System.out.println("");
+       System.out.println("PREORDEN");
+       pino.PreOrden();
+       System.out.println("");
+       System.out.println("NUMERO DE HOJAS: " + pino.CountLeafs());
+       System.out.println("NUMERO DE NODOS: " + pino.CountNodes());
+       
+       
+       
+       
+       //System.out.println(pino.Search(88));
     }
 
 }
