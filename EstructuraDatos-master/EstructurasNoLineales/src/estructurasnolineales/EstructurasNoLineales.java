@@ -75,7 +75,7 @@ public class EstructurasNoLineales {
        pino.PreOrden();
        System.out.println("");
        System.out.println("NUMERO DE HOJAS: " + pino.CountLeafs());
-       System.out.println("NUMERO DE NODOS: " + pino.CountNodes());
+       System.out.println("NUMERO DE NODO: " + pino.CountNodes());
        
        
        
