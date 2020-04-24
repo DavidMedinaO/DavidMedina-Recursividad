@@ -79,11 +79,9 @@ public class BinarySearchTree {
         
          if (currentRoot != null) {
             CountNodes(currentRoot.getLeft());
-           
             CountNodes(currentRoot.getRight());
             contNodos++;
         } 
-        
         
         return contNodos;
     }
