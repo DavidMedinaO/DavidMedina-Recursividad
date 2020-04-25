@@ -66,21 +66,29 @@ public class EstructurasNoLineales {
        
         
        System.out.println("INORDEN"); 
-       pino.InOrden();
+       pino.InOrden();//Punto 1
        System.out.println("");
        System.out.println("POSTORDEN");
-       pino.Postorden();
+       pino.Postorden(); // Punto 2
        System.out.println("");
        System.out.println("PREORDEN");
-       pino.PreOrden();
+       pino.PreOrden();// Punto 3
        System.out.println("");
-       System.out.println("NUMERO DE HOJAS: " + pino.CountLeafs());
-       System.out.println("NUMERO DE NODO: " + pino.CountNodes());
+       System.out.println("NUMERO DE HOJAS: " + pino.CountLeafs());//Punto 4
+       System.out.println("NUMERO DE NODOS: " + pino.CountNodes());//Punto 5
+        BinaryNode k2 =pino.Search(10);
        
        
+       System.out.println("");
+       pino.LevelOrder();
+      
+       pino.LastLevel();
        
        
        //System.out.println(pino.Search(88));
     }
 
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
 }

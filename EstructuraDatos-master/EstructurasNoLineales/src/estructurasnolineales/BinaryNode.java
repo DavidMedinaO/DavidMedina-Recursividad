@@ -15,6 +15,7 @@ public class BinaryNode {
     private BinaryNode left;
     private BinaryNode right;
     private boolean ChildPosition;
+    private int level;
 
     public BinaryNode(int data) {
         setData(data);
@@ -86,5 +87,16 @@ public class BinaryNode {
      */
     public boolean isChildPosition() {
         return ChildPosition;
+    }
+    
+    public int getLevel() {
+        return level;
+    }
+
+    /**
+     * @param level the level to set
+     */
+    public void setLevel(int level) {
+        this.level = level;
     }
 }

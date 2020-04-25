@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package estructurasnolineales;
+import java.util.LinkedList; 
+import java.util.Queue; 
 
 /**
  *
@@ -16,6 +18,7 @@ public class BinarySearchTree {
     private boolean position;
     private int contadorHojas=0;
     private int contNodos = 0;
+    private int size=0;
 
     public BinarySearchTree() {
         root = null;
@@ -170,29 +173,82 @@ public class BinarySearchTree {
     private void Delete(int data, BinaryNode currentRoot) {
 
         BinaryNode v = Search(data);
+        if(v != null){
+        if (v == this.root && v.getLeft() == null && v.getRight() == null) {
+            this.root = null;
+            return;
+        }
         if (v.isLeaf()) {
             if (position) {
-                father.setRight(null);
+                this.father.setRight(null);
             } else {
-                father.setLeft(null);
+                this.father.setLeft(null);
             }
-        } else if (v.hasOneChild()) {
+        }
+        else if (v.hasOneChild()) {
             if (v.isChildPosition()) {
-                father.setRight(v.getRight());
+               
+                if(root == v){
+                    BinaryNode minimum = getMinor(v.getRight());
+                    Delete(minimum.getData());
+                    v.setData(minimum.getData());
+                    minimum.setLevel(v.getLevel());
+                }
+                else if (position) {
+                    this.father.setRight(v.getRight());
+                } else {
+                    this.father.setLeft(v.getRight());
+                }
+                levelDown(v);
+                v.setRight(null);
+
             } else {
-                father.setLeft(v.getLeft());
+                if(root ==v ){
+                    root = v.getLeft();
+                    v.setLeft(null);
+                }
+                else if (position) {
+                    this.father.setRight(v.getLeft());
+                } else {
+                    this.father.setLeft(v.getLeft());
+                }
+                levelDown(v);
+                v.setRight(null);
+
             }
         } else {
             BinaryNode minimum = getMinor(v.getRight());
             Delete(minimum.getData());
             v.setData(minimum.getData());
+            minimum.setLevel(v.getLevel());
+        }
+        //contNodos--;
         }
     }
-
+    
+    
+    
+    private void levelDown(BinaryNode  currentRoot){
+        if(currentRoot!=null){
+            currentRoot.setLevel(currentRoot.getLevel()-1);
+            levelDown(currentRoot.getLeft());
+            levelDown(currentRoot.getRight());
+        }
+    }
     //Punto 7
-    public int LastLevel() {
-        //...
-        return 0;
+     public int LastLevel() {
+        LastLevel(root,0);
+        return size;
+    }
+   
+    private void LastLevel (BinaryNode currentRoot, int contLevel){
+        if(currentRoot!= null){
+          LastLevel(currentRoot.getLeft(),contLevel+1);  
+          if(contLevel >size){
+              size = contLevel;
+          }
+          LastLevel(currentRoot.getRight(), contLevel+1);
+        }
     }
 
     //Punto 8
@@ -207,7 +263,47 @@ public class BinarySearchTree {
             System.out.print("\n");
         
          */
+        if (root == null) 
+      return; 
+  
+    Queue <BinaryNode> q = new LinkedList<>(); 
+  
+    // Pushing root node into the queue. 
+    q.add(root); 
+  
+    // Pushing delimiter into the queue. 
+    q.add(null); 
+  
+    // Executing loop till queue becomes 
+    // empty 
+    while (!q.isEmpty()) { 
+  
+      BinaryNode curr = q.poll(); 
+  
+      // condition to check the 
+      // occurence of next level 
+      if (curr == null) { 
+        if (!q.isEmpty()) { 
+          q.add(null); 
+          System.out.print("\n"); 
+        } 
+      } else { 
+        // Pushing left child current node 
+        if (curr.getLeft() != null) 
+          q.add(curr.getLeft()); 
+  
+        // Pushing right child current node 
+        if (curr.getRight() != null) 
+          q.add(curr.getRight()); 
+  
+        System.out.print(curr.getData() + " "); 
+      } 
     }
+    
+    
+    }
+    
+    
 
     public BinaryNode getMinor(BinaryNode currentRoot) {
         if (currentRoot.getLeft() == null) {
@@ -216,4 +312,46 @@ public class BinarySearchTree {
             return getMinor(currentRoot.getLeft());
         }
     }
+    
+    
+    static void levelOrder(BinaryNode root) { 
+    if (root == null) 
+      return; 
+  
+    Queue <BinaryNode> q = new LinkedList<>(); 
+  
+    // Pushing root node into the queue. 
+    q.add(root); 
+  
+    // Pushing delimiter into the queue. 
+    q.add(null); 
+  
+    // Executing loop till queue becomes 
+    // empty 
+    while (!q.isEmpty()) { 
+  
+      BinaryNode curr = q.poll(); 
+  
+      // condition to check the 
+      // occurence of next level 
+      if (curr == null) { 
+        if (!q.isEmpty()) { 
+          q.add(null); 
+          System.out.println(); 
+        } 
+      } else { 
+        // Pushing left child current node 
+        if (curr.getLeft() != null) 
+          q.add(curr.getLeft()); 
+  
+        // Pushing right child current node 
+        if (curr.getRight() != null) 
+          q.add(curr.getRight()); 
+  
+        System.out.print(curr.getData() + " "); 
+      } 
+    }
+    
+
+}
 }
